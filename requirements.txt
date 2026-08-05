@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+sentence-transformers
+rank-bm25
+scikit-learn
+numpy 
+ollama

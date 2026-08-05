@@ -1,0 +1,64 @@
+[
+{
+"question":"What is a Docker image?",
+"type":"factoid",
+"answer":"A Docker image is a read-only template used to create containers."
+},
+
+{
+"question":"What is a Docker container?",
+"type":"factoid",
+"answer":"A Docker container is a runnable instance of a Docker image."
+},
+
+{
+"question":"What is Docker Compose?",
+"type":"factoid",
+"answer":"Docker Compose is a tool for defining and running multi-container applications."
+},
+
+{
+"question":"What is Docker Hub?",
+"type":"factoid",
+"answer":"Docker Hub is a service for storing and sharing Docker images."
+},
+
+{
+"question":"What command is used to build a Docker image?",
+"type":"factoid",
+"answer":"The docker build command is used to build an image."
+},
+
+{
+"question":"What command runs a Docker container?",
+"type":"factoid",
+"answer":"The docker run command is used to run containers."
+},
+
+
+{
+"question":"How do Docker images and Docker containers work together?",
+"type":"multi-hop",
+"answer":"Images provide templates, while containers are running instances created from those images."
+},
+
+{
+"question":"How does Docker Compose help developers manage containers created from images?",
+"type":"multi-hop",
+"answer":"Docker Compose defines and manages multiple containers created from Docker images."
+},
+
+
+{
+"question":"Who is going to be the CEO of Docker in 2035?",
+"type":"unanswerable",
+"answer":"I don't know."
+},
+
+{
+"question":"What is the weather in Waterloo today according to Docker documentation?",
+"type":"unanswerable",
+"answer":"I don't know."
+}
+
+]
