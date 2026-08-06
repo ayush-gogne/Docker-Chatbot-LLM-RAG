@@ -12,3 +12,4 @@ To run our project:
 -You can then ask questions and the chatbot will answer. type exit to end it<br>
 -To evaluate the chatbots responses vs what it is supposed to be run the command python evaluate.py<br>
 
+Or use this single commmand to run all experimental results from the report: python3 -m pip install -r requirements.txt && ollama pull llama3.2 && python3 collect_documents.py && python3 create_chunks.py && yes y | head -n 20 | python3 evaluate.py
