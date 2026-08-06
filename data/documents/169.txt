@@ -1,0 +1,69 @@
+Connect ChatGPT to a sandbox | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Connect ChatGPT to a sandbox
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Availability:
+GA
+Requires:
+Docker Sandboxes 0.37.0 or later
+Connect the ChatGPT desktop app to a sandbox over SSH so Codex works inside the
+isolated environment instead of on your host.
+Note
+This page covers running Codex in the ChatGPT desktop app connected to a
+sandbox over SSH. To run the Codex CLI inside a sandbox directly, see
+Codex
+.
+Prerequisites
+SSH access set up. See
+Editor and app integrations
+.
+The ChatGPT desktop app installed.
+ChatGPT's remote server requires the
+codex
+command in the sandbox. The Codex
+sandbox template used in the following section includes this command.
+Connect
+Create a named Codex sandbox for the current directory if you don't already
+have one:
+$
+sbx create --name demo codex .
+Confirm that you can connect to the sandbox from a terminal:
+$
+ssh demo.sbx
+In the ChatGPT desktop app, open
+Settings > Connections
+and add an SSH
+connection manually. Enter the sandbox hostname, such as
+demo.sbx
+, as the
+host, then use the remote folder picker to
+select the mounted workspace
+as the
+remote project.
+For more connection options, see the OpenAI instructions to
+connect to an SSH host
+.
+Related
+Editor and app integrations
+â how SSH access works and how to
+set it up
+Codex
+â run the Codex CLI inside a sandbox
+Edit this page
+Request changes
+Table of contents

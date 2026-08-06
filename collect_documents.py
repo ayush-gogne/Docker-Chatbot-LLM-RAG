@@ -4,11 +4,32 @@
 # For our RAG system it downloads the pages and retrieves useful  content
 
 #the first step is we have to import the necassary libraries
+import json
+import os
+import random
+from urllib.parse import urljoin
+
+import numpy as np
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-import os
-import json
+
+try:
+    import torch
+except ImportError:  # pragma: no cover - optional dependency
+    torch = None
+
+
+def set_seed(seed=42):
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    random.seed(seed)
+    np.random.seed(seed)
+    if torch is not None:
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+
+
+set_seed(42)
 
 # Website where we start collecting Docker documents
 startPage = "https://docs.docker.com/"

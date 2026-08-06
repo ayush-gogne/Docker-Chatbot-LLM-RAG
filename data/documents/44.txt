@@ -1,0 +1,52 @@
+What next after the Docker workshop | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Get started
+Guides
+Manuals
+Reference
+What next after the Docker workshop
+Ask Gordon
+Copy Markdown
+View Markdown
+Congratulations on completing the Docker workshop. You've learned how to containerize applications, work with multi-container setups, use Docker Compose, and apply image-building best practices.
+Here's what to explore next.
+Secure your images
+Take your image-building skills to the next level with Docker Hardened Imagesâsecure, minimal, and production-ready base images that are now free for everyone.
+What are Docker Hardened Images?
+Understand secure, minimal, production-ready base images with near-zero CVEs.
+Get started with DHI
+Pull and run your first Docker Hardened Image in minutes.
+Use hardened images
+Learn how to use DHI in your Dockerfiles and CI/CD pipelines.
+Explore the DHI catalog
+Browse available hardened images, variants, and security attestations.
+Build with AI
+Docker makes it easy to run AI models locally and build agentic AI applications. Explore Docker's AI tools and start building AI-powered apps.
+Docker Model Runner
+Run and manage AI models locally using familiar Docker commands with OpenAI-compatible APIs.
+MCP Toolkit
+Set up, manage, and run containerized MCP servers to power your AI agents.
+Build AI agents with Docker Agent
+Create teams of specialized AI agents that collaborate to solve complex problems.
+Use AI models in Compose
+Define AI model dependencies in your Docker Compose applications.
+Language-specific guides
+Apply what you've learned to your preferred programming language with hands-on tutorials.
+Node.js
+Learn how to containerize and develop Node.js applications.
+Python
+Build and run Python applications in containers.
+Java
+Containerize Java applications with best practices.
+Go
+Develop and deploy Go applications using Docker.
+Edit this page
+Request changes

@@ -1,0 +1,120 @@
+Docker Sandboxes | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Docker Sandboxes
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
+sandbox gets its own Docker daemon, filesystem, and network â the agent can
+build containers, install packages, and modify files without touching your host
+system.
+Note
+The
+sbx
+CLI is free to use, including for commercial work. Only
+organization governance
+requires a separate paid subscription.
+Organization admins can
+centrally manage sandbox network and filesystem policies
+,
+so the same rules apply uniformly across every developer's machine. Available
+on a separate paid subscription.
+Get started
+For complete system requirements, see the
+get started prerequisites
+.
+Install the
+sbx
+CLI and sign in:
+macOS
+Windows
+Linux (Ubuntu)
+$
+brew trust docker/tap
+$
+brew install docker/tap/sbx
+$
+sbx login
+>
+winget
+install
+-h
+Docker
+.
+sbx
+>
+sbx
+login
+$
+curl -fsSL https://get.docker.com
+|
+sudo
+REPO_ONLY
+=
+1
+sh
+$
+sudo apt-get install docker-sbx
+$
+sudo usermod -aG kvm
+$USER
+$
+newgrp kvm
+$
+sbx login
+Then launch an agent in a sandbox:
+$
+cd
+~/my-project
+$
+sbx run claude
+See the
+get started guide
+for a full walkthrough, or jump to
+the
+usage guide
+for basic commands.
+Learn more
+Agents
+â supported agents and per-agent configuration
+Integrations
+â connect editors and apps like VS Code and
+Cursor to a sandbox over SSH
+Customize
+â reusable templates and declarative kits for
+extending or tailoring sandboxes
+Architecture
+â microVM isolation, workspace mounting,
+networking
+Security
+â isolation model, credential handling, and
+network policies
+CLI reference
+â full list of
+sbx
+commands and options
+Troubleshooting
+â common issues and fixes
+FAQ
+â login requirements, telemetry, etc
+Feedback
+Your feedback shapes what gets built next. If you run into a bug, hit a
+missing feature, or have a suggestion, open an issue at
+github.com/docker/sbx-releases/issues
+.
+Edit this page
+Request changes
+Table of contents

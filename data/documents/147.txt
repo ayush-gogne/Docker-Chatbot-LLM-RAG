@@ -1,0 +1,36 @@
+Supported agents | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Supported agents
+Ask Gordon
+Copy Markdown
+View Markdown
+Docker Sandboxes runs the following agents out of the box:
+Claude Code
+Codex
+Copilot
+Cursor
+Droid
+Gemini
+Kiro
+OpenCode
+Docker Agent
+Shell
+â agent-less sandbox for manual setup or testing
+Want to pre-install tools or customize an agent's environment?
+See
+Customize
+.
+Edit this page
+Request changes

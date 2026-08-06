@@ -1,5 +1,8 @@
 #first we have to import all of the necassary libraries
 import os
+import random
+
+import numpy as np
 #downloaded ollama so now we can use it
 import ollama
 #Used for keyword searching
@@ -8,6 +11,24 @@ from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 # Used to compare similarity, use for dense retrieval
 from sklearn.metrics.pairwise import cosine_similarity
+
+try:
+    import torch
+except ImportError:  # pragma: no cover - optional dependency
+    torch = None
+
+
+def set_seed(seed=42):
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    random.seed(seed)
+    np.random.seed(seed)
+    if torch is not None:
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+
+
+set_seed(42)
 #frist Loading all text files from  the documents folder :)
 #this is our main file for running the chatbout, it collexts the dcuments, searches them for relavent info, and uses llama to create an answer
 def loadDocs():

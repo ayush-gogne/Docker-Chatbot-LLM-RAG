@@ -1,0 +1,287 @@
+Get started with Docker Sandboxes | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Get started with Docker Sandboxes
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Docker Sandboxes run AI coding agents in isolated microVM sandboxes. Each
+sandbox gets its own Docker daemon, filesystem, and network â the agent can
+build containers, install packages, and modify files without touching your host
+system.
+This page walks through your first session: install the CLI, run an agent in a
+sandbox, see how the sandbox isolates it, control what it can reach on the
+network, and clean up.
+Prerequisites
+macOS
+Windows
+Linux (Ubuntu)
+macOS Sonoma (version 14) or later
+Apple silicon
+An API key or authentication method for the agent you want to use. Most agents
+require an API key for their model provider (Anthropic, OpenAI, Google, and
+others). See the
+agent pages
+for provider-specific instructions.
+64-bit Intel or AMD (x86_64)
+Windows 11
+Windows Hypervisor Platform enabled. Open an elevated PowerShell prompt (Run
+as Administrator) and run:
+Enable-WindowsOptionalFeature
+-Online
+-FeatureName
+HypervisorPlatform
+-All
+An API key or authentication method for the agent you want to use. Most agents
+require an API key for their model provider (Anthropic, OpenAI, Google, and
+others). See the
+agent pages
+for provider-specific instructions.
+Ubuntu 24.04 or later
+64-bit Intel or AMD (x86_64) or 64-bit Arm (aarch64)
+KVM hardware virtualization supported and enabled by the CPU. If you're
+running inside a VM, nested virtualization must be turned on. Verify that KVM
+is available:
+$
+lsmod
+|
+grep kvm
+A working setup shows
+kvm_intel
+,
+kvm_amd
+,
+kvm_arm64
+, or
+kvm
+in the output. If the output
+is empty, run
+kvm-ok
+for diagnostics. If KVM is unavailable,
+sbx
+will
+not start.
+Your user in the
+kvm
+group:
+$
+sudo usermod -aG kvm
+$USER
+Log out and back in (or run
+newgrp kvm
+) for the group change to take effect.
+An API key or authentication method for the agent you want to use. Most agents
+require an API key for their model provider (Anthropic, OpenAI, Google, and
+others). See the
+agent pages
+for provider-specific instructions.
+If you run
+sbx
+in a virtual desktop infrastructure (VDI) environment, the
+environment must support nested virtualization.
+Docker Desktop is not required to use
+sbx
+.
+Install and sign in
+macOS
+Windows
+Linux (Ubuntu)
+$
+brew trust docker/tap
+$
+brew install docker/tap/sbx
+$
+sbx login
+>
+winget
+install
+-h
+Docker
+.
+sbx
+>
+sbx
+login
+$
+curl -fsSL https://get.docker.com
+|
+sudo
+REPO_ONLY
+=
+1
+sh
+$
+sudo apt-get install docker-sbx
+$
+sbx login
+The first command adds Docker's
+apt
+repository to your system.
+If you need to install
+sbx
+manually, download a binary directly from the
+sbx-releases
+repository.
+sbx login
+opens a browser for Docker OAuth. On first login (and after
+sbx policy reset
+), the CLI prompts you to choose a default network policy for your
+sandboxes:
+Choose a default network policy:
+1. Open         â All network traffic allowed, no restrictions.
+2. Balanced     â Default deny, with common dev sites allowed.
+3. Locked Down  â All network traffic blocked unless you allow it.
+Use â/â to navigate, Enter to select, or press 1â3.
+Balanced
+is a good starting point â it permits traffic to common
+development services while blocking everything else. You can adjust individual
+rules later. See
+Policies
+for a full description of each
+option.
+Note
+See the
+FAQ
+for details on why sign-in is required and what
+happens with your data.
+Authenticate your agent
+For Claude Code with a Claude subscription (Max, Team, or Enterprise), no
+upfront setup is needed â use the
+/login
+command inside the sandbox to sign
+in with OAuth. The session token stays on your host and is never stored inside
+the sandbox.
+If you prefer to authenticate with an API key, see
+Credentials
+for how to store one with
+sbx secret set
+.
+To give the agent access to GitHub for creating pull requests or interacting
+with repositories:
+$
+sbx secret
+set
+-g github -t
+"
+$(
+gh auth token
+)
+"
+Run your first sandbox
+Pick a project directory and launch an agent with
+sbx run
+:
+$
+cd
+~/my-project
+$
+sbx run --name my-sandbox claude
+Replace
+claude
+with the agent you want to use â see
+Agents
+for the
+full list.
+The first run takes a little longer while the agent image is pulled. Subsequent
+runs reuse the cached image and start in seconds.
+This attaches you to the agent running inside the sandbox. Give it a real
+task â ask it to add a feature, install a dependency, or build and run your
+project. The agent has a full Linux environment with its own Docker daemon, so
+it can install packages, build images, and start containers on its own while it
+works.
+See what the agent can touch
+From another terminal, list your sandboxes:
+$
+sbx ls
+SANDBOX       AGENT    STATUS    PORTS   WORKSPACE
+my-sandbox    claude   running           ~/my-project
+Each row shows a sandbox's name, the agent running in it, its status, any
+published ports
+, and its
+workspace â the host directory shared into the sandbox. That workspace is the
+one part of your machine the agent can see.
+By default, the workspace is shared read-write, so the agent and your host see
+the same files. Edits the agent makes to your project appear in your working
+tree as it writes them, and you review them as an ordinary Git diff before
+committing.
+Everything else runs inside the microVM, isolated from your host:
+The agent has its own filesystem, Docker daemon, and network.
+Packages it installs, images it pulls, and containers it starts stay inside
+the sandbox. Your host system is untouched, and removing the sandbox discards
+them.
+If you'd rather the agent not touch your working tree at all â for example,
+when running several agents on one repository â use
+clone mode
+, which gives it a private clone instead.
+Control what the agent can reach
+Isolation isn't only about the filesystem. You also control what the sandbox
+can reach on the network. You chose a default policy when you signed in, and
+you can inspect or adjust it at any time.
+Check which rules are in effect:
+$
+sbx policy ls
+To allow a specific host:
+$
+sbx policy allow network registry.npmjs.org
+With
+Balanced
+, common development services are allowed by default. With
+Locked Down
+, everything is blocked until you allow it â including your
+model provider's API. If the agent can't reach a service it needs, the network
+policy is the first place to look. See
+Policies
+for the
+full rule set and how to customize it.
+Clean up
+Sandboxes persist after the agent exits, so you can stop one and pick up where
+you left off later:
+$
+sbx stop my-sandbox
+Installed packages, Docker images, and configuration changes are preserved
+across restarts. When you're done with a sandbox, remove it to reclaim disk
+space:
+$
+sbx rm my-sandbox
+Removing a sandbox deletes everything inside it â installed packages, Docker
+images, and the in-sandbox Git clone if you used clone mode. Files in your
+host working tree are unaffected.
+What's next
+You've run an agent, seen how the sandbox isolates it, and controlled its
+network access. A few directions from here.
+Run
+sbx
+with no arguments to open the interactive dashboard: a live view of
+every sandbox where you can attach to agents, open shells, and manage network
+rules from one place.
+Then explore:
+Usage guide
+â basic commands, reconnecting, workspaces, and port
+publishing.
+Workflow patterns
+â Git strategies, local services, CI, and
+authenticated tools.
+Customize with kits
+â package an agent, its tools, and its
+network rules into a reusable definition you launch with a single flag.
+Agents
+â the full list of supported agents and how to configure
+each one.
+Governance
+â centrally manage network and filesystem policies
+across a team.
+Edit this page
+Request changes
+Table of contents

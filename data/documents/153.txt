@@ -1,0 +1,85 @@
+Gemini | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Gemini
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+This guide covers authentication, configuration, and usage of Google Gemini in
+a sandboxed environment.
+Official documentation:
+Gemini CLI
+Quick start
+Create a sandbox and run Gemini for a project directory:
+$
+sbx run gemini ~/my-project
+The workspace parameter is optional and defaults to the current directory:
+$
+cd
+~/my-project
+$
+sbx run gemini
+Authentication
+Gemini requires either a Google API key or a Google account with Gemini access.
+API key
+: Store your key using
+stored secrets
+:
+$
+sbx secret
+set
+-g google
+Google account
+: If no API key is set, Gemini prompts you to sign in
+interactively when it starts. Interactive authentication is scoped to the
+sandbox and doesn't persist if you remove and recreate it.
+Configuration
+Sandboxes don't pick up user-level configuration from your host, such as
+~/.gemini
+. Only project-level configuration in the working directory is
+available inside the sandbox. See
+Why doesn't the sandbox use my user-level agent configuration?
+for workarounds.
+The sandbox disables Gemini's built-in sandbox tool (since the sandbox itself
+provides isolation).
+Default startup command
+Without extra args, the sandbox runs:
+gemini --yolo
+Arguments after
+--
+are added after the default flags when the first one is
+itself a flag (begins with
+-
+), so
+--yolo
+is preserved:
+$
+sbx run gemini -- -p
+"explain this"
+# runs gemini --yolo -p "explain this"
+When the first argument is a bare word â a subcommand or prompt â it replaces
+the defaults instead.
+Base image
+Template:
+docker/sandbox-templates:gemini
+Gemini is configured to disable its built-in OAuth flow. Authentication is
+managed through the proxy with API keys.
+See
+Customize
+to pre-install tools or customize this
+environment.
+Edit this page
+Request changes
+Table of contents

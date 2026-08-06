@@ -1,0 +1,62 @@
+Connect Cursor to a sandbox | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Connect Cursor to a sandbox
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Availability:
+GA
+Requires:
+Docker Sandboxes 0.37.0 or later
+Cursor is built on VS Code, so it connects to a sandbox the same way, using
+Remote - SSH. Your editor stays on your host while files, terminals, and
+extensions run in the isolated sandbox.
+Note
+This page covers the Cursor editor connecting to a sandbox over SSH. To run
+the Cursor agent CLI inside a sandbox instead, see
+Cursor agent
+.
+Prerequisites
+SSH access set up. See
+Editor and app integrations
+.
+Cursor's Remote - SSH support installed.
+Connect
+Confirm that you can connect to the sandbox from a terminal:
+$
+ssh demo.sbx
+Open the Command Palette and run
+Remote-SSH: Connect to Host
+.
+Enter the sandbox host manually as
+<name>.sbx
+.
+Cursor opens a new window connected to the sandbox. Use the remote folder
+picker to
+select the mounted workspace
+.
+Notes
+The first connection installs the editor server inside the sandbox, so it
+can take a moment. Later connections are faster.
+Related
+Editor and app integrations
+â how SSH access works and how to
+set it up
+Cursor agent
+â run the Cursor CLI inside a sandbox
+Edit this page
+Request changes
+Table of contents

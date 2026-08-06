@@ -1,0 +1,45 @@
+Reference documentation | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Reference
+Get started
+Guides
+Manuals
+Reference documentation
+Ask Gordon
+Copy Markdown
+View Markdown
+This section includes the reference documentation for the Docker platform's
+various APIs, CLIs, drivers and specifications, and file formats.
+File formats
+Dockerfile
+Defines the contents and startup behavior of a single container.
+Compose file
+Defines a multi-container application.
+Command-line interfaces (CLIs)
+Docker CLI
+The main Docker CLI, includes all
+docker
+commands.
+Compose CLI
+The CLI for Docker Compose, for building and running multi-container applications.
+Daemon CLI (dockerd)
+Persistent process that manages containers.
+Application programming interfaces (APIs)
+Engine API
+The main API for Docker, provides programmatic access to a daemon.
+Docker Hub API
+API to interact with Docker Hub.
+DVP Data API
+API for Docker Verified Publishers to fetch analytics data.
+Registry API
+API for Docker Registry.
+Edit this page
+Request changes

@@ -1,0 +1,115 @@
+Connect Claude Desktop to a sandbox | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Connect Claude Desktop to a sandbox
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Availability:
+GA
+Requires:
+Docker Sandboxes 0.37.0 or later
+Claude Desktop can run Claude Code on a remote machine over SSH. Point it at a
+sandbox so the agent works inside the isolated environment instead of on your
+host.
+Note
+This page covers Claude Desktop connecting to a sandbox over SSH. To run the
+Claude Code CLI inside a sandbox directly, see
+Claude Code
+.
+Prerequisites
+SSH access set up. See
+Editor and app integrations
+.
+An existing named sandbox. See
+Create or identify a sandbox
+.
+Claude Desktop installed.
+Connect
+Warning
+Connecting Claude Desktop to a sandbox over SSH transmits Anthropic
+credentials into the Claude Code process within the sandbox, reducing
+isolation guarantees.
+Confirm that you can connect to the sandbox from a terminal:
+$
+ssh demo.sbx
+In Claude Desktop, open the environment drop-down before starting a session and
+select
++ Add SSH connection
+. Enter a name for the connection and enter the
+sandbox hostname, such as
+demo.sbx
+, in
+SSH Host
+. Leave
+SSH Port
+and
+Identity File
+empty because the managed SSH config supplies them.
+Select the connection from the environment drop-down, then use the remote
+folder picker to
+select the mounted workspace
+. The
+picker might initially open at
+/home/agent
+.
+For more connection options, see the Claude Desktop instructions for
+SSH sessions
+.
+Troubleshoot a broken SSH connection after token refresh
+The SSH connection drops when the Anthropic token expires and needs to be
+refreshed. To work around this, run the sandbox manually from your host:
+$
+sbx run --name <sandbox-name>
+Troubleshoot SSH connection timeouts on Windows
+Claude Desktop requires Git on Windows. If an SSH connection times out and the
+Claude Desktop logs include
+ProxyCommand error: spawn sh ENOENT
+, install
+Git for Windows
+.
+If Git is already installed, verify that
+sh.exe
+is available on your
+PATH
+:
+PS
+>
+where
+.
+exe
+sh
+If the command doesn't find
+sh.exe
+, add the Git
+bin
+directory to your user
+Path
+. The default directory is
+C:\Program Files\Git\bin
+. Quit and restart
+Claude Desktop after updating
+Path
+.
+Related
+Editor and app integrations
+â how SSH access works and how to
+set it up
+Claude Code
+â run the Claude Code CLI inside a
+sandbox
+Edit this page
+Request changes
+Table of contents

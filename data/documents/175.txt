@@ -1,0 +1,80 @@
+Governance | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Manuals
+Get started
+Guides
+Reference
+Governance
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Sandbox governance covers the policy system that controls what sandboxes can
+access over the network and on the filesystem. It operates at two layers, and
+only one applies at a time:
+Local policy
+is configured per machine using the
+sbx policy
+CLI. It lets
+individual developers customize which domains their sandboxes can reach. See
+Local policy
+.
+Organization policy
+is configured centrally in the Docker Admin Console or
+via the
+Governance API
+. Rules defined at the
+org level apply uniformly across every sandbox in the organization. When
+organization governance is active, it replaces local policy entirely: local
+sbx policy
+rules are no longer evaluated. See
+Organization policy
+.
+Alongside this access-control policy, admins can require developers to sign in
+as members of their organization before using sandboxes at all.
+Sign-in enforcement
+is deployed through endpoint
+management and ensures developers can't bypass organization policy by using a
+personal account.
+Note
+Organization governance is available on a separate paid subscription.
+Contact Docker Sales
+to request access.
+Learn more
+Policy concepts
+: resource model, rule syntax, evaluation, and
+precedence
+Local policy
+: configure network and filesystem rules on your
+machine with the
+sbx policy
+CLI
+Organization policy
+: centrally manage sandbox policies across your
+organization from the Admin Console
+Sign-in enforcement
+: require developers to sign in
+as organization members, enforced through endpoint management
+Monitoring
+: inspect active rules and monitor sandbox network
+traffic with
+sbx policy ls
+and
+sbx policy log
+Audit logs
+: view, configure, export, and collect governance audit
+records
+API reference
+: manage org policies
+programmatically via the Governance API
+Edit this page
+Request changes
+Table of contents

@@ -1,0 +1,70 @@
+Lab: AI Fundamentals for Developers | Docker Docs
+Gordon
+Gordon, your AI assistant for Docker docs
+Search
+Start a new chat
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedback
+Answers are generated based on the documentation.
+Back
+Guides
+Get started
+Manuals
+Reference
+Lab: AI Fundamentals for Developers
+Hands-on lab: Learn the four core pillars of AI application development.
+Work with the Chat Completions API, prompt engineering, tool calling, and RAG
+through interactive exercises.
+Ask Gordon
+Copy Markdown
+View Markdown
+Table of contents
+Get hands-on with the four core pillars of AI application development: models,
+prompt engineering, tool calling, and RAG. This lab runs entirely on your
+machine using Docker Model Runner â no API key or cloud account required.
+Launch the lab
+Start the labspace:
+$
+docker compose -p labspace -f oci://dockersamples/labspace-ai-fundamentals up -d
+Note
+This lab uses an AI model, which requires
+the Docker Model Runner to be enabled
+. The model may take some time to download.
+Open your browser to
+http://localhost:3030
+.
+When you're done, tear down the labspace:
+$
+docker compose -p labspace down
+What you'll learn
+By the end of this Labspace, you will have completed the following:
+Understand the Chat Completions API and how to structure messages for a model
+Use prompt engineering techniques including system prompts, few-shot examples, and structured output
+Implement tool calling and the agentic loop in code
+Build a RAG pipeline that grounds model responses in your own data
+Modules
+#
+Module
+Description
+1
+Welcome & Setup
+Introduction to the lab and verifying your environment
+2
+Talking to Models
+Chat Completions API, message roles, and stateless model behavior
+3
+Prompt Engineering
+System prompts, few-shot examples, and structured output
+4
+Tool Calling
+Tool definitions, the agentic loop, and executing tools in code
+5
+Retrieval Augmented Generation (RAG)
+Retrieve, augment, and generate with your own knowledge base
+6
+Wrap-up
+Summary of concepts and next steps
+Edit this page
+Request changes
+Table of contents
