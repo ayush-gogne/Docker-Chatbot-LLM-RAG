@@ -1,8 +1,8 @@
-#import all th neccasary libraries
+# Importing all the neccasary libraries
+# The purpose of this file is to break the documents down into smaller chunks for processing
 import json
 import os
 import random
-
 import numpy as np
 
 try:
@@ -20,19 +20,16 @@ def set_seed(seed=42):
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
 
-
 set_seed(42)
 
-#this file is to break the documents down into smaller pieces and chunks
-
-# Load the documents we collected earlier
+# Loading the collected documents
 documents = json.load(
     open(
         "data/metadata.json",
         encoding="utf-8"
     )
 )
-# Store all document chunks
+# Storing all the document chunks
 chunks = []
 # Give each chunk its own ID
 chunkId = 0
@@ -74,7 +71,7 @@ with open(
     )
 # Show how many chunks were created
 print(
-    " we created this many: ",
+    "Created:",
     len(chunks),
     "chunks"
 )
