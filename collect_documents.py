@@ -1,23 +1,21 @@
-#By: Ayush gogne and Ryan Chisholm
+# Ayush Gogne
 
-#This file is to collect the docker documents and prepares the data :)
-# For our RAG system it downloads the pages and retrieves useful  content
+# This file collects and prepares Docker documentation for use in the RAG system.
+# It downloads relevant documentation pages, extracts useful content, and prepares the data for retrieval.
 
-#the first step is we have to import the necassary libraries
+# Importing the necassary libraries
 import json
 import os
 import random
-from urllib.parse import urljoin
-
 import numpy as np
 import requests
+from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
 try:
     import torch
-except ImportError:  # pragma: no cover - optional dependency
+except ImportError: 
     torch = None
-
 
 def set_seed(seed=42):
     os.environ["PYTHONHASHSEED"] = str(seed)
@@ -27,27 +25,26 @@ def set_seed(seed=42):
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)
-
-
+            
 set_seed(42)
 
-# Website where we start collecting Docker documents
+# Website where the Docker documention files are collected from
 startPage = "https://docs.docker.com/"
 
-# Number of documents we want to collect
-# 200-2000 recommended but we decided to do 200 for simplicity, perhaps the model would learn and perform better if we used more documents for its knowledgebase
+# Number of documents to collect for the knowledge base.
+# Corpus size of 1000 documents was hardcoded, typically a learning curve analysis is done to find the correct amount of data that balances overfitting and underfitting.
 maxDocs = 200
 
-# Store documents and pages we already visited
+# docs list to store pages we already visited
 docs = []
 seenPages = set()
 
-# extract webpage and disassemble and keep only the useful text
+# code to extract the webpage, disassemble and keeping only the useful text
 def cleanText(html):
 
     soup = BeautifulSoup(html, "html.parser")
 
-    # now we are going to Remove parts of the website we do not need for simplicity
+    # Remove sections of the page that are not useful for this purpose
     for item in soup(["script", "style", "nav", "footer"]):
         item.decompose()
 
@@ -55,7 +52,7 @@ def cleanText(html):
 
     cleanLines = []
 
-    # Remove empty lines
+    # Removing empty lines
     for line in text.split("\n"):
         line = line.strip()
 
@@ -65,18 +62,18 @@ def cleanText(html):
     return "\n".join(cleanLines)
 
 
-# Get more Docker pages from a single webpage for more knowledge
+# Get more Docker pages from a single webpage through hyperlinks
 def getLinks(url):
-    #downloading the webpage
+    # Download the webpage
     html = requests.get(url).text
     soup = BeautifulSoup(html, "html.parser")
-    #list to store the links
+    # List to store the links
     links = []
-    # Find all links on the page
+    # Find all the links on the page
     for a in soup.find_all("a", href=True):
         link = urljoin(url, a["href"])
         # Only keep Docker documentation links
-        # also check to make sure we havent visited that link already, if not then add to the list
+        # also checking to make sure we havent visited that link already, if not then add to the list
         if link.startswith("https://docs.docker.com") and link not in seenPages:
             links.append(link)
 
@@ -84,15 +81,15 @@ def getLinks(url):
 
 
 # Pages we still need to collect
-# Put the first docker page that we will visit, initializing
+# Put the first docker page that we will visit, initialization
 pages = [startPage]
 
 
-# Keep collecting until we have enough documents, max 200
+# Keep collecting until we have enough documents
 while pages and len(docs) < maxDocs:
     #extract the first page from thre list
     currentPage = pages.pop(0)
-    # Skip pages we already collected
+    # Skip already collected pages
     if currentPage in seenPages:
         continue
     seenPages.add(currentPage)
@@ -102,7 +99,7 @@ while pages and len(docs) < maxDocs:
         # Get the useful text from the page
         text = cleanText(html)
         # Save pages that have enough information
-        # we hardcoded 400 because we dont want a whole bunch of small documents with little information and we don't want it to be too high, otherwise it will miss documents of reasonable length that gets to the point
+        # hardcoded document length to 400 to ensure useful documents are selected
         if len(text) > 400:
             docs.append({
                 "id": len(docs),
@@ -119,7 +116,7 @@ while pages and len(docs) < maxDocs:
 
 
 
-# Create folder for documents, if it already exists then dont do anything
+# Create a folder for documents, if it already exists then don't do anything
 os.makedirs("data/documents", exist_ok=True)
 
 # Save each document as a text file
@@ -127,7 +124,7 @@ for doc in docs:
     fileName = "data/documents/" + str(doc["id"]) + ".txt"
     with open(fileName, "w", encoding="utf-8") as file:
         file.write(doc["text"])
-# Save document information
+# Save the document information
 with open("data/metadata.json", "w") as file:
     #put everything in json
     json.dump(
@@ -136,4 +133,4 @@ with open("data/metadata.json", "w") as file:
         indent=4
     )
 
-print("Finished collecting!! :", len(docs), "documents")
+print("Collected:", len(docs), "documents")
