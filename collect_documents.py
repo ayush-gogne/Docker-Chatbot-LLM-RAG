@@ -1,5 +1,3 @@
-# Ayush Gogne
-
 # This file collects and prepares Docker documentation for use in the RAG system.
 # It downloads relevant documentation pages, extracts useful content, and prepares the data for retrieval.
 
