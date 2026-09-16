@@ -11,4 +11,4 @@ Steps to run the chatbot:
 8. To evaluate the chatbot's responses to the expected answer, Run the command "python evaluate.py"<br>
 
 Note:
-You can also use this single commmand to run all experimental results from the report: cd your dir/Docker-RAG-Project && python3 -m pip install -r requirements.txt && ollama pull llama3.2 && python3 collect_documents.py && python3 create_chunks.py && yes y | head -n 20 | python3 evaluate.py
+You can also use this single command to run all the steps: cd your dir/Docker-RAG-Project && python3 -m pip install -r requirements.txt && ollama pull llama3.2 && python3 collect_documents.py && python3 create_chunks.py && yes y | head -n 20 | python3 evaluate.py
